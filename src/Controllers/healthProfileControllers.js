@@ -15,13 +15,7 @@ export const createProfile = async (req, res) => {
     delete profileData.id;
     delete profileData.userId
 
-    let resumeUrl;
     let profileImageUrl;
-
-    if (req.files?.resume) {
-      const resumeFile = req.files.resume[0];
-      resumeUrl = `${req.protocol}://${req.get('host')}/${resumeFile.path?.replace(/\\/g, '/')}`;
-    };
 
     if (req.files?.profileImage) {
       const profileImageFile = req.files.profileImage[0];
@@ -29,7 +23,7 @@ export const createProfile = async (req, res) => {
     };
 
     
-    const profile = await createProfileService(userId, { ...profileData, resumeUrl, profileImageUrl });
+    const profile = await createProfileService(userId, { ...profileData, profileImageUrl });
     res.status(201).json({
       title: "Profile Created",
       profile,
@@ -58,13 +52,7 @@ export const updateProfile = async (req, res) => {
     delete updatedData.id;
     delete updatedData.userId
 
-    let resumeUrl;
     let profileImageUrl;
-
-    if (req.files?.resume) {
-      const resumeFile = req.files.resume[0];
-      resumeUrl = `${req.protocol}://${req.get('host')}/${resumeFile.path?.replace(/\\/g, '/')}`;
-    };
 
     if (req.files?.profileImage) {
       const profileImageFile = req.files.profileImage[0];
@@ -75,7 +63,7 @@ export const updateProfile = async (req, res) => {
     const profile = await updateProfileService(userId, { ...updatedData, resumeUrl, profileImageUrl });
 
     // Clear user cache to avoid stale data
-    const pattern = `jobs:*:user:${profile.userId}*`;
+    const pattern = `meal:*:user:${profile.userId}*`;
     const keys = await cacheManager.getKeys(pattern);
       
     if (keys.length > 0) {
