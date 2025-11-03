@@ -7,11 +7,10 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import { authRoutes, healthProfileRoutes, uploadRoutes, mealRoutes, adminRoutes } from './routes/index.js';
+import { authRoutes, healthProfileRoutes, uploadRoutes, mealRoutes } from './routes/index.js';
 import { authMiddleware } from './Middleware/authMiddleware.js';
 import { errorHandler, notFound } from './Middleware/errorHandler.js';
 import { initRedis } from './config/cache.js';
-import { authorizeAdmin } from './Middleware/authorizeAdmin.js';
 
 
 const app = express();
@@ -38,7 +37,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/healthProfile', authMiddleware, healthProfileRoutes);
 app.use('/api/uploads', authMiddleware, uploadRoutes);
 app.use('/api/recommend', authMiddleware, mealRoutes);
-app.use('/admin', authMiddleware, authorizeAdmin, adminRoutes);
+
 
 
 // Error handlers

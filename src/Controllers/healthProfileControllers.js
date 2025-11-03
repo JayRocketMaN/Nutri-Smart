@@ -4,8 +4,8 @@ import {
   getProfileService,
   updateProfileService,
   deleteAccountService,
-} from "../services/profileService.js";
-import cacheManager from "../utils/cacheManager.js";
+} from "../Services/healthProfileService.js";
+import cacheManager from "../Utils/cacheManager.js";
 
 export const createProfile = async (req, res) => {
   try {

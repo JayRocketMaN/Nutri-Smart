@@ -1,5 +1,5 @@
 import logger from "../config/logger.js";
-import { uploadProfileImage } from "../services/uploadServices.js";
+import { uploadProfileImage } from "../Services/uploadService.js";
 
 
 

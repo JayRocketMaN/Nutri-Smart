@@ -8,19 +8,19 @@ const APP_CONFIG = {
     NODE_ENV: process.env.NODE_ENV || "dev",
 
 
-    DB_NAME: process.env.DB_NAME || "Nutrismart",
-    DB_HOST: process.env.DB_HOST || "localhost",
-    DB_USER: process.env.DB_USER || "root",
-    DB_PASS: process.env.DB_PASS || "Buconlodge21)",
+    DB_NAME: process.env.DB_NAME,
+    DB_HOST: process.env.DB_HOST,
+    DB_USER: process.env.DB_USER,
+    DB_PASS: process.env.DB_PASS,
 
     JWT_SECRET: process.env.JWT_SECRET || "your_jwt_secret_key",
     JWT_OTP_SECRET: process.env.JWT_OTP_SECRET,
     ACCESS_TOKEN_EXPIRY_TIME: process.env.ACCESS_TOKEN_EXPIRY_TIME,
     VERIFICATION_TOKEN_EXPIRY_TIME: process.env.VERIFICATION_TOKEN_EXPIRY_TIME,
 
-    EMAIL_SERVICE_SMTP_HOST: process.env.EMAIL_SERVICE_SMTP_HOST || "smtp.example.com",
-    EMAIL_SERVICE_USER: process.env.EMAIL_SERVICE_USER || "dev",
-    EMAIL_SERVICE_APP_PASSWORD: process.env.EMAIL_SERVICE_APP_PASSWORD || "devpass",
+    EMAIL_SERVICE_SMTP_HOST: process.env.EMAIL_SERVICE_SMTP_HOST || "smtp.gmail.com",
+    EMAIL_SERVICE_USER: process.env.EMAIL_SERVICE_USER,
+    EMAIL_SERVICE_APP_PASSWORD: process.env.EMAIL_SERVICE_APP_PASSWORD,
     EMAIL_SERVICE_PORT: process.env.EMAIL_SERVICE_PORT || 587,
     OTP_EXPIRY_TIME_MINS: process.env.OTP_EXPIRY_TIME_MINS || 5,
     SMTP_SECURE: process.env.SMTP_SECURE === "true" || false,

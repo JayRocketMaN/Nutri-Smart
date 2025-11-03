@@ -4,7 +4,7 @@ import {
   getProfile,
   updateProfile,
   deleteAccount,
-} from "../controllers/profileControllers.js";
+} from "../Controllers/healthProfileControllers.js";
 import upload from "../Middleware/multerSetup.js";
 
 const router = express.Router();

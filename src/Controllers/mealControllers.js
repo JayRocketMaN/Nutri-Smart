@@ -1,7 +1,7 @@
 import logger from "../config/logger.js";
 import { User, healthProfile } from "../models/index.js";
 import emailService from "../Services/emailService.js";
-import { recommendMeal } from "../services/mealRecommendationService.js";
+import { recommendationService }  from "../Services/mealRecommendationService.js";
 
 
 export const mealController = async (req, res) => {
@@ -23,9 +23,9 @@ export const mealController = async (req, res) => {
     }
     const profileData = userProfile.get({ plain: true });
     
-    const jobs = await recommendMeal(profileData);
+    const jobs = await ensureEmbedding(profileData);
 
-    // Send recommended jobs to email
+    // Send recommended meal to email
     await emailService.sendRecommendedMealEmail(
       userProfile?.User?.email || "example@gmail.com", // Pls put recipient email here
       'Your Meal Recommendations',
@@ -37,7 +37,7 @@ export const mealController = async (req, res) => {
       { 
         success: true, 
         message: "Meal recommendations fetched successfully, Check your email!",
-        jobs
+        
     }
     );
 
