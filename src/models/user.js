@@ -50,11 +50,11 @@ const User = sequelize.define(
     indexes: [
       {
         unique: true,
-        fields: ["userId"],
+        fields: ["user_id"],
       },
       {
         unique: true,
-        fields: ["fullName"],
+        fields: ["full_Name"],
       },
       {
         unique: true,
