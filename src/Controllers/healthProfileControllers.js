@@ -60,7 +60,7 @@ export const updateProfile = async (req, res) => {
     };
 
 
-    const profile = await updateProfileService(userId, { ...updatedData, resumeUrl, profileImageUrl });
+    const profile = await updateProfileService(userId, { ...updatedData, profileImageUrl });
 
     // Clear user cache to avoid stale data
     const pattern = `meal:*:user:${profile.userId}*`;
