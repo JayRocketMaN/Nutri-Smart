@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import config from "./index.js";
+import config from "./config/index.js";
 import process from "node:process";
 
 const sequelize = new Sequelize(
@@ -23,7 +23,7 @@ const sequelize = new Sequelize(
 export const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    // await sequelize.sync({ alter: true });
+    await sequelize.sync({ alter: true });
     console.log("Database connected");
   } catch (error) {
     console.log("Database error:", error);

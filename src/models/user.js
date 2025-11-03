@@ -27,7 +27,7 @@ const User = sequelize.define(
    timestamps: true,
     hooks: {
       beforeCreate: async (user) => {
-        user.username = user.username.toLowerCase();
+        user.full_name = user.full_name.toLowerCase();
         user.email = user.email.toLowerCase();
         if (user.password) {
           const salt = await bcrypt.genSalt(10);
@@ -35,8 +35,8 @@ const User = sequelize.define(
         }
       },
       beforeUpdate: async (user) => {
-        if (user.changed("username")) {
-          user.username = user.username.toLowerCase();
+        if (user.changed("full_name")) {
+          user.full_name = user.full_name.toLowerCase();
         }
         if (user.changed("email")) {
           user.email = user.email.toLowerCase();

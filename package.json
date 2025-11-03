@@ -2,7 +2,7 @@
   "name": "nutri_smartbe",
   "version": "1.0.0",
   "description": "Nutri_smart\r A simple mobile/web app that recommends meals and breakdown their nutritional content based on your preferences/health condition",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
