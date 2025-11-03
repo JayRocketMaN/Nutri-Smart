@@ -1,34 +1,29 @@
-import { Sequelize } from "sequelize";
-import config from "./index.js";
-import process from "node:process";
+import express from "express";
+import dotenv from "dotenv";
 
-const sequelize = new Sequelize(
-  config.DATABASE_NAME,
-  config.DATABASE_USERNAME,
-  config.DATABASE_PASSWORD,
-  {
-    dialect: config.DATABASE_DIALECT,
-    dialectOptions: {
-      ssl: {
-        require: config.ENVIRONMENT !== "dev" ?? false,
-        rejectUnauthorized: false,
-      },
-    },
-    port: config.DATABASE_PORT,
-    host: config.DATABASE_HOST,
-    logging: (msg) => console.log(msg),
-  }
-);
+import authRoute from "./routes/authRoute.js";
+import foodLibraryRoute from "./routes/food_libraryRoute.js";
+import healthProfileRoute from "./routes/health_profileRoute.js";
+import mealSuggestionRoute from "./routes/meal_suggestionRoute.js";
+import nutritionTipRoute from "./routes/nutrition_tipRoute.js";
+import allergyWarningRoute from "./routes/allergy_warningRoute.js";
 
-export const connectDB = async () => {
-  try {
-    await sequelize.authenticate();
-    // await sequelize.sync({ alter: true });
-    console.log("Database connected");
-  } catch (error) {
-    console.log("Database error:", error);
-    process.exit(1);
-  }
-};
+dotenv.config();
 
-export default sequelize;
+const app = express();
+app.use(express.json());
+
+// Routes
+app.use("/api/auth", authRoute);
+app.use("/api/food-library", foodLibraryRoute);
+app.use("/api/health-profile", healthProfileRoute);
+app.use("/api/meal-suggestion", mealSuggestionRoute);
+app.use("/api/nutrition-tip", nutritionTipRoute);
+app.use("/api/allergy-warning", allergyWarningRoute);
+
+app.get("/", (req, res) => {
+  res.send("Nutri Smart API running successfully 🚀");
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
