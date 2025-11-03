@@ -4,7 +4,7 @@ import { DataTypes } from 'sequelize';
 
 
 const healthProfile = sequelize.define('healthProfile', {
-  userId: {
+  user_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -21,19 +21,19 @@ const healthProfile = sequelize.define('healthProfile', {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  activityLevel: {
+  activity_level: {
     type: DataTypes.ENUM('sedentary', 'lightly active', 'moderately active', 'very active'),
     allowNull: false,
   },
-  healthCondition: {
+  health_condition: {
     type: DataTypes.ENUM('diabetes', 'heart disease', 'high blood pressure', 'high cholesterol', 'obesity'),
     allowNull: true,
   },
-  foodAllergies: {
+  food_allergies: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  dietaryPreferences: {
+  dietary_preferences: {
     type: DataTypes.TEXT,
     allowNull: false,
   },

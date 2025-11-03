@@ -3,16 +3,16 @@ import { DataTypes } from "sequelize";
 
 
 const meal = sequelize.define('meal', {
-  mealId: {
+  meal_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  mealName: {
+  meal_name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  mealType: {
+  meal_type: {
     type: DataTypes.ENUM('breakfast', 'lunch', 'dinner', 'snack'),
     allowNull: false,
   },
@@ -24,7 +24,7 @@ const meal = sequelize.define('meal', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  nutritionalInfo: {
+  nutritional_info: {
     type: DataTypes.JSON,
     allowNull: false,
   },
@@ -32,7 +32,7 @@ const meal = sequelize.define('meal', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  cookingInstructions: {
+  cooking_instructions: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
