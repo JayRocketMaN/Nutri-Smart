@@ -1,34 +1,17 @@
-import { Sequelize } from "sequelize";
-import config from "./index.js";
-import process from "node:process";
+import express from "express";
+import config from "./config/index.js";  
+import sequelize, {connectDB} from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
 
-const sequelize = new Sequelize(
-  config.DATABASE_NAME,
-  config.DATABASE_USERNAME,
-  config.DATABASE_PASSWORD,
-  {
-    dialect: config.DATABASE_DIALECT,
-    dialectOptions: {
-      ssl: {
-        require: config.ENVIRONMENT !== "dev" ?? false,
-        rejectUnauthorized: false,
-      },
-    },
-    port: config.DATABASE_PORT,
-    host: config.DATABASE_HOST,
-    logging: (msg) => console.log(msg),
-  }
-);
+const app = express();
+const PORT = process.env.PORT || 4000;
 
-export const connectDB = async () => {
-  try {
-    await sequelize.authenticate();
-    // await sequelize.sync({ alter: true });
-    console.log("Database connected");
-  } catch (error) {
-    console.log("Database error:", error);
-    process.exit(1);
-  }
-};
+app.use(express.json());
 
-export default sequelize;
+app.use("/api/auth", authRoutes);
+
+await connectDB();
+
+app.listen(PORT, () => {
+  console.log(`Server is listening at http://localhost:${PORT}`)
+});
