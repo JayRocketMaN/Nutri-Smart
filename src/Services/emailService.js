@@ -1,0 +1,66 @@
+import sendEmail from "../config/emailConfiguration.js"
+import ejs from 'ejs';
+import path from 'path';
+import logger from "../config/logger.js";
+
+const __dirname = import.meta.dirname;
+
+const sendOtp = async (recipient, subject='Verify Your Account', username, otp, otpTimeMins) => {
+    try {
+        const templatePath = path.join(__dirname, '../..', 'views', 'verifyOtp.ejs');
+        
+        const htmlData = await ejs.renderFile(templatePath, {user: username, otp: otp, otpTimeMins: otpTimeMins});
+        await sendEmail(recipient, subject, htmlData);
+
+        logger.info(`Otp sent to ${username} successfully.`);
+    } catch (error) {
+        logger.error(`Error sending Otp: ${error}`)
+    };
+};
+
+const sendWelcomeEmail = async (recipient, subject='Welcome to Nutrismart', username) => {
+    try {
+        const templatePath = path.join(__dirname, '../..', 'views', 'welcomeMessage.ejs');
+        
+        const htmlData = await ejs.renderFile(templatePath, {user: username});
+        await sendEmail(recipient, subject, htmlData);
+
+        logger.info(`Welcome email sent to ${username} successfully.`);
+    } catch (error) {
+        logger.error(`Error sending welcome message: ${error}`)
+    };
+};
+
+const sendPasswordRecoveryEmail = async (recipient, subject='Password Reset Request', username, otp, otpTimeMins) => {
+    try {
+        const templatePath = path.join(__dirname, '../..', 'views', 'passwordRecovery.ejs');
+        
+        const htmlData = await ejs.renderFile(templatePath, {user: username, otp: otp, otpTimeMins: otpTimeMins});
+        await sendEmail(recipient, subject, htmlData);
+
+        logger.info(`Password reset link sent to ${username} successfully.`);
+    } catch (error) {
+        logger.error(`Error sending password reset link: ${error}`)
+    };
+};
+
+const sendRecommendedMealEmail = async (recipient, subject='Your Meal Recommendations', username, Meal) => {
+    try {
+        const templatePath = path.join(__dirname, '../..', 'views', 'recommendedMeal.ejs');
+        
+        const htmlData = await ejs.renderFile(templatePath, {user: username, recommendedMeal: Meal? JSON.parse(Meal) : []});
+        await sendEmail(recipient, subject, htmlData);
+
+        logger.info(`Meal recommedations sent to ${username} successfully.`);
+    } catch (error) {
+        logger.error(`Error sending meal recommendations: ${error}`)
+    };
+};
+
+
+export default {
+    sendOtp,
+    sendWelcomeEmail,
+    sendRecommendedMealEmail,
+    sendPasswordRecoveryEmail,
+};

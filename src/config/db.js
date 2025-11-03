@@ -1,35 +1,19 @@
-import { Sequelize } from "sequelize";
-import config from "./index.js";
-import process from "node:process";
+// Sequelize setup
+import { Sequelize } from 'sequelize';
+import APP_CONFIG from './APP_CONFIG.js';
 
-const sequelize = new Sequelize(
-  config.DATABASE_NAME,
-  config.DATABASE_USERNAME,
-  config.DATABASE_PASSWORD,
-  {
-    dialect: config.DATABASE_DIALECT,
-    dialectOptions: {
-      ssl: {
-        require: config.ENVIRONMENT !== "dev" ?? false,
-        rejectUnauthorized: false,
-      },
-    },
-    port: config.DATABASE_PORT,
-    host: config.DATABASE_HOST,
-    logging: (msg) => console.log(msg),
-  }
-);
+const sequelize = new Sequelize(`${APP_CONFIG.DB_NAME}`, `${APP_CONFIG.DB_USER}`, `${APP_CONFIG.DB_PASS}`, {
+  host: `${APP_CONFIG.DB_HOST}`,
+  dialect: 'mysql',
+  port: `${APP_CONFIG.DB_PORT}` || 3306,
+});
 
-export const connectDB = async () => {
-  try {
-    await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
-    console.log("Database connected");
-  } catch (error) {
-    console.log("Database error:", error);
-    process.exit(1);
-  }
-};
+try{
+  await sequelize.authenticate();
+  console.log('Database connected successfully.');
+}catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
 
 export default sequelize;
 
