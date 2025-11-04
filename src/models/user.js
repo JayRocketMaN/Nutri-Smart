@@ -4,11 +4,10 @@ import bcrypt from "bcrypt";
 
 const User = sequelize.define(
   "User",
-  {
-    user_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+  {    
+    user_uuid: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
   },
     full_name: {
       type: DataTypes.STRING,
@@ -20,51 +19,18 @@ const User = sequelize.define(
       allowNull: false,
       unique: true,
     },
+    roles : {
+      type: DataTypes.ENUM("user", "admin"),
+      allowNull: false,
+      defaultValue: "user",
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-   timestamps: true,
-    hooks: {
-      beforeCreate: async (user) => {
-        user.full_name = user.full_name.toLowerCase();
-        user.email = user.email.toLowerCase();
-        if (user.password) {
-          const salt = await bcrypt.genSalt(10);
-          user.password = await bcrypt.hash(user.password, salt);
-        }
-      },
-      beforeUpdate: async (user) => {
-        if (user.changed("full_name")) {
-          user.full_name = user.full_name.toLowerCase();
-        }
-        if (user.changed("email")) {
-          user.email = user.email.toLowerCase();
-        }
-        if (user.password) {
-          const salt = await bcrypt.genSalt(10);
-          user.password = await bcrypt.hash(user.password, salt);
-        }
-      },
-    },
-    indexes: [
-      {
-        unique: true,
-        fields: ["userId"],
-      },
-      {
-        unique: true,
-        fields: ["fullName"],
-      },
-      {
-        unique: true,
-        fields: ["email"],
-      },
-    ],
-  }
-);
+  });
 
-User.prototype.verifyPassword = async function (password) {
+  User.prototype.verifyPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 

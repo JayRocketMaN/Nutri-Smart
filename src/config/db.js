@@ -1,4 +1,8 @@
-const sequelize = new sequelize(
+import { Sequelize } from "sequelize";
+import config from "./index.js";
+import process from "node:process";
+
+const sequelize = new Sequelize(
   config.DATABASE_NAME,
   config.DATABASE_USERNAME,
   config.DATABASE_PASSWORD,
@@ -16,24 +20,6 @@ const sequelize = new sequelize(
   }
 );
 
-
-
-const sequelize = require('./database');
-const healthProfile = require();
-const MealSuggestion = require('./models/MealSuggestion');
-const UserMealPlan = require('./models/UserMealPlan');
-
-async function createTables() {
-  try {
-    await sequelize.sync({ force: true });
-    console.log('Tables created successfully.');
-  } catch (error) {
-    console.error('Error creating tables:', error);
-  }
-}
-
-
-
 export const connectDB = async () => {
   try {
     await sequelize.authenticate();
@@ -46,6 +32,3 @@ export const connectDB = async () => {
 };
 
 export default sequelize;
-
-
-createTables();

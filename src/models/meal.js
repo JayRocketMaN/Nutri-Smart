@@ -1,4 +1,4 @@
-import sequelize from "../db.js"; 
+import sequelize from "../config/db.js"; 
 import { DataTypes } from "sequelize";
 
 
@@ -18,7 +18,6 @@ const meal = sequelize.define('meal', {
   },
   description: {
         type: DataTypes.TEXT,
-        allowNull: false,
   },
   calories: {
     type: DataTypes.INTEGER,
@@ -36,7 +35,15 @@ const meal = sequelize.define('meal', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-});
+})
+   {
+    indexes: [
+      {
+        unique: true,       // Unique index
+        fields: ['meal_id']   // Column(s) to index
+      },
+    ]
+  };
 
 export default meal;
 

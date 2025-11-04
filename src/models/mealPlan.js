@@ -1,15 +1,16 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db';
+import sequelize from '../config/db.js';
 import meal from './meal.js';  
 import healthProfile from './healthProfile.js';
 
+//meal recomendation
 const mealPlan = sequelize.define('mealPlan', {
   user_id: {
     type: DataTypes.INTEGER,
     references: {
       model: healthProfile,
       key: 'user_id',
-    },
+  },
   },
   meal_id: {
     type: DataTypes.INTEGER,
@@ -18,33 +19,21 @@ const mealPlan = sequelize.define('mealPlan', {
       key: 'meal_id',
     }
   },
-mealType: {
+meal_type: {
     type: DataTypes.ENUM('breakfast', 'lunch', 'dinner', 'snack'),
-    references: {
-      model: meal,
-      key: 'meal_id',
+    allowNull: false,
   },
-},
-  calories: {
+calories: {
     type: DataTypes.INTEGER,
-    references: {
-      model: meal,
-      key: 'meal_id',
-    },
- description: {
-    type: DataTypes.TEXT,
-    references: {
-      model: meal,
-      key: 'meal_id',
-    },
- nutritionalInfo: {
-    type: DataTypes.JSON,
-    references: {
-      model: meal,
-      key: 'meal_id',
-    },
+    allowNull: false,
   },
-  mealTime: {
+  description: {
+        type: DataTypes.TEXT,
+  },
+ nutritional_info: {
+    type: DataTypes.JSON,
+  },
+  meal_time: {
     type: DataTypes.DATE,
     allowNull: false,
   },
@@ -52,12 +41,13 @@ mealType: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-}
-},
 });
 
+
+
+
 //meal and healthProfile relationship
-healthProfile.belongsToMany(meal, { through: mealPlan, foreignKey: 'user_id' });
-meal.belongsToMany(healthProfile, { through: mealPlan, foreignKey: 'meal_id' });
+//healthProfile.belongsToMany(meal, { through: mealPlan, foreignKey: 'user_id' });
+//meal.belongsToMany(healthProfile, { through: mealPlan, foreignKey: 'meal_id' });
 
 export default mealPlan;

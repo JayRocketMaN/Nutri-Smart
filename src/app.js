@@ -1,34 +1,56 @@
-import { Sequelize } from "sequelize";
-import config from "./config/index.js";
+import express from "express";
 import process from "node:process";
+import config from "./config/index.js";
+import sequelize, { connectDB } from "./config/db.js";
+import models from "./models/index.js";
 
-const sequelize = new Sequelize(
-  config.DATABASE_NAME,
-  config.DATABASE_USERNAME,
-  config.DATABASE_PASSWORD,
-  {
-    dialect: config.DATABASE_DIALECT,
-    dialectOptions: {
-      ssl: {
-        require: config.ENVIRONMENT !== "dev" ?? false,
-        rejectUnauthorized: false,
-      },
-    },
-    port: config.DATABASE_PORT,
-    host: config.DATABASE_HOST,
-    logging: (msg) => console.log(msg),
-  }
-);
 
-export const connectDB = async () => {
-  try {
-    await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
-    console.log("Database connected");
-  } catch (error) {
-    console.log("Database error:", error);
-    process.exit(1);
-  }
-};
+
+//init express app
+const app = express();
+
+
+//routes
+app.get("/api/health", (req, res) => {
+  res.json({ status: "API is running fine and healthy" });
+});
+
+
+// route defaults
+app.use((req, res, next) => {
+  res.status(404).json({ success: false, message: "Route does not exist" });
+});
+
+await sequelize.sync({alter: true});
+await connectDB();
+
+app.listen(config.PORT, () => {
+  console.log('Server running on port ${config.PORT}');
+});
 
 export default sequelize;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
