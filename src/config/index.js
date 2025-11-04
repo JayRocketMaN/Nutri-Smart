@@ -4,7 +4,7 @@ dotenv.config();
 export default {
   ENVIRONMENT: process.env.NODE_ENV || "dev",
   PORT: Number(process.env.PORT || 3000),
-  DATABASE_NAME: process.env.DATABASE_NAME || "Nutrismart",
+  DATABASE_NAME: process.env.DATABASE_NAME || "nutrismart",
   DATABASE_USERNAME: process.env.DATABASE_USERNAME || "root",
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || "Buconlodge21)",
   DATABASE_HOST: process.env.DATABASE_HOST || "localhost",
