@@ -98,6 +98,6 @@ nutri-smart-backend/
 │   ├── app.js
 │   └── 
 │
-├── 
+├── .env
 ├── package.json
 └── README.md
