@@ -9,7 +9,7 @@ const logDir = path.join(process.cwd(), "logs");
 if (!fs.existsSync(logDir)) fs.mkdirSync(logDir);
 
 const stream = pinoRoll({
-  file: path.join(logDir, "nutrismart-%DATE%.log"),
+  file: path.join(logDir, "Nutrismart-%DATE%.log"),
   frequency: "daily",
   size: "10M",
   retain: 7,
@@ -17,6 +17,7 @@ const stream = pinoRoll({
 });
 
 export const Logger = pino(
-  { level: ENV.NODE_ENV === "production" ? "info" : "debug", timestamp: pino.stdTimeFunctions.isoTime },
+  { level: ENV.NODE_ENV === "production" ? "info" : "debug", 
+    timestamp: pino.stdTimeFunctions.isoTime },
   stream
 );

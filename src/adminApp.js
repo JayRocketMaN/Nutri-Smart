@@ -1,11 +1,12 @@
 // src/adminApp.js
+
 import express from "express";
 import path from "path";
 import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
-import adminEjsRoutes from "./routes/adminEjs.routes.js";
-import adminApiRoutes from "./routes/admin.routes.js";
+import adminEjsRoutes from "./Routes/adminEjsRoutes.js";
+import adminApiRoutes from "./Routes/adminRoutes.js";
 import { APP_CONFIG } from "./config/config.js";
 import { errorHandler } from "./Middleware/errorHandler.js";
 

@@ -1,4 +1,5 @@
-// src/services/admin.service.js
+// src/services/adminService.js
+
 import Meal from "../models/meal.js";
 import { cacheService } from "../Services/cacheService.js";
 

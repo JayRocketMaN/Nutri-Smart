@@ -4,6 +4,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db.js";
 
 const Meal = sequelize.define("Meal", {
+  
   id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
   name: { type: DataTypes.STRING, allowNull: false },
   category: DataTypes.STRING,
@@ -14,6 +15,8 @@ const Meal = sequelize.define("Meal", {
   allergens: DataTypes.STRING,
   tags: DataTypes.STRING,
   instructions: DataTypes.TEXT
-}, { tableName: "meals", timestamps: true });
+}, 
+
+{ tableName: "meals", timestamps: true });
 
 export default Meal;

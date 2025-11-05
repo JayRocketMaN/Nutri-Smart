@@ -1,4 +1,5 @@
-// src/services/profile.service.js
+// src/services/profileService.js
+
 import { HealthProfile } from "../models/index.js";
 export const profileService = {
   async createOrUpdate(userId, data) {

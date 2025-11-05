@@ -1,4 +1,5 @@
-// src/services/recommendation.service.js
+// src/services/mealRecommendationService.js
+
 import { HealthProfile, HealthCondition, Meal } from "../models/index.js";
 import { cacheService } from "./cacheService.js";
 import AppError from "../utils/appError.js";
@@ -34,7 +35,15 @@ export const recommendationService = {
         restrictedNutrients: cond.restrictedNutrients,
         recommendedFoods: cond.recommendedFoods,
         restrictedFoods: cond.restrictedFoods,
-        matchedMeals: matchedMeals.map(m => ({ id: m.id, name: m.name, calories: m.calories, protein: m.protein, carbs: m.carbs, fat: m.fat, allergens: m.allergens, tags: m.tags }))
+        matchedMeals: matchedMeals.map(m => ({ 
+          id: m.id, name: m.name, 
+          calories: m.calories, 
+          protein: m.protein, 
+          carbs: m.carbs, 
+          fat: m.fat, 
+          allergens: m.allergens, 
+          tags: m.tags 
+        }))
       });
     }
 

@@ -1,4 +1,5 @@
-// src/services/cache.service.js
+// src/services/cacheService.js
+
 import { APP_CONFIG } from "../config/config.js";
 const redis = () => APP_CONFIG.REDIS;
 

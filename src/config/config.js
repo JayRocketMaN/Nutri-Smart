@@ -11,7 +11,7 @@ export const ENV = {
   PORT: Number(process.env.PORT) || 4000,
   DB_NAME: process.env.DB_NAME || "nutrismart_db",
   DB_USER: process.env.DB_USER || "root@localhost",
-  DB_PASS: process.env.DB_PASS || "HERitAGE@101197!",
+  DB_PASS: process.env.DB_PASS || "",
   DB_HOST: process.env.DB_HOST || "127.0.0.1",
   DB_PORT: Number(process.env.DB_PORT) || 3306,
   REDIS_URL: process.env.REDIS_URL || "redis://127.0.0.1:6379",

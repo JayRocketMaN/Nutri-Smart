@@ -6,9 +6,12 @@ const logger = (APP_CONFIG && APP_CONFIG.LOGGER) ? APP_CONFIG.LOGGER : console;
 
 export const errorHandler = (err, req, res, next) => {
   if (!err.isOperational) {
+
     logger.error("Unexpected Error:", err);
     err = new AppError("Internal Server Error", 500);
-  } else {
+  } 
+  
+  else {
     logger.warn(`Handled Error: ${err.message}`);
   }
 

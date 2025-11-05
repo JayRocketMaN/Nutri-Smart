@@ -1,4 +1,5 @@
-// src/services/auth.service.js
+// src/services/authService.js
+
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import AppError from  "../utils/appError.js";
@@ -16,8 +17,10 @@ export const authService = {
     const user = await User.create({ name, email, password: hash });
     const code = genOtp();
     const expiresAt = new Date(Date.now() + 15*60*1000);
-    await OTP.create({ userId: user.id, email, code, purpose: "verify", expiresAt });
-    await sendEmail({ to: email, subject: "NutriAI OTP", text: `Your verification code: ${code}` });
+    await OTP.create({ userId: user.id, email, code, 
+      purpose: "verify", expiresAt });
+    await sendEmail({ to: email, subject: "Nutrismart OTP", 
+      text: `Your verification code: ${code}` });
     return { id: user.id, email: user.email };
   },
 
@@ -35,8 +38,11 @@ export const authService = {
     if (!user.verified) throw new AppError("Account not verified", 403);
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) throw new AppError("Invalid credentials", 400);
-    const token = jwt.sign({ id: user.id, role: user.role }, APP_CONFIG.JWT_SECRET, { expiresIn: "7d" });
-    return { token, user: { id: user.id, name: user.name, email: user.email, role: user.role } };
+    const token = jwt.sign({ id: user.id, role: user.role }, APP_CONFIG.JWT_SECRET, 
+      { expiresIn: "7d" });
+    return { token, user: { id: user.id, name: user.name, 
+      email: user.email, role: user.role 
+    } };
   },
 
   async forgotPassword({ email }) {
@@ -45,7 +51,10 @@ export const authService = {
     const code = genOtp();
     const expiresAt = new Date(Date.now() + 15*60*1000);
     await OTP.create({ userId: user.id, email, code, purpose: "reset", expiresAt });
-    await sendEmail({ to: email, subject: "NutriAI Password Reset OTP", text: `Your password reset OTP: ${code}` });
+    await sendEmail({ to: email, subject: "Nutrismart Password Reset OTP", 
+      text: `Your password reset OTP: ${code}` 
+    });
+
     return true;
   },
 
@@ -69,6 +78,6 @@ export const authService = {
   },
 
   async logout() {
-    return true; // token-based stateless
+    return true; 
   }
 };

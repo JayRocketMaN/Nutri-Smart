@@ -1,4 +1,4 @@
-// src/services/email.service.js
+// src/services/emailService.js
 import { APP_CONFIG } from "../config/config.js";
 
 export const sendEmail = async ({ to, subject, text, html }) => {
