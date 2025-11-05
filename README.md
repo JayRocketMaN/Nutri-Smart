@@ -57,12 +57,17 @@ npm start
 Or run with live updates (nodemon):
 npm run dev
 
-Folder Structure
+
+# Folder Structure
+
+
+```bash
 nutri-smart-backend/
 │
 ├── src/
 │   ├── config/
-│   │   └── db.js
+│   │   ├── db.js
+│   │   └── index.js
 │   │
 │   ├── controllers/
 │   │   ├── 
@@ -71,26 +76,24 @@ nutri-smart-backend/
 │   │   └── 
 │   │
 │   ├── middleware/
-│   │   ├── 
-│   │   └── 
+│   │   ├── authMiddleware.js
+│   │   └── validationMiddleware.js
 │   │
 │   ├── models/
 │   │   ├── user.js
 │   │   ├── meal.js
-│   │   ├── healthProfile.js
-│   │   └── mealPlan.js
+│   │   ├── mealPlan.js
+│   │   └── healthProfile.js
 │   │
 │   ├── routes/
-│   │   ├── 
 │   │   ├── 
 │   │   ├── 
 │   │   └── 
 │   │
 │   ├── utils/
-│   │   ├── AppError.js
-│   │   ├── Auth.js
 │   │   ├── Validator.js
-│   │   └── 
+│   │   ├── AppError.js
+│   │   └── Auth.js
 │   │
 │   ├── app.js
 │   └── 
@@ -98,4 +101,3 @@ nutri-smart-backend/
 ├── .env
 ├── package.json
 └── README.md
-
