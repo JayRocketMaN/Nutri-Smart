@@ -2,9 +2,9 @@
   "name": "nutri_smartbe",
   "version": "1.0.0",
   "description": "Nutri_smart\r A simple mobile/web app that recommends meals and breakdown their nutritional content based on your preferences/health condition",
-  "main": "app.js",
+  "main": "mainApp.js",
   "scripts": {
-    "dev": "nodemon src/app.js",
+    "dev": "nodemon src/mainApp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,7 +13,7 @@
   "type": "module",
   "dependencies": {
     "axios": "^1.13.1",
-    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -30,7 +30,6 @@
     "redis": "^5.9.0",
     "sequelize": "^6.37.7"
   },
-
   "devDependencies": {
     "nodemon": "^3.1.10",
     "pino-pretty": "^13.1.2"

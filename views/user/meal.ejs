@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><title>Recommendations</title><link rel="stylesheet" href="/css/style.css"></head><body>
+<header><a href="/">Nutrismart</a></header>
+<main class="card"><h2>Personalized Recommendations</h2>
+<% if (recommendations && recommendations.length) { %>
+  <% recommendations.forEach(r => { %>
+    <article class="meal-card">
+      <h3><%= r.condition %></h3>
+      <p><strong>Description:</strong> <%= r.description %></p>
+      <p><strong>Recommended Nutrients:</strong> <%= r.recommendedNutrients %></p>
+      <p><strong>Restricted Nutrients:</strong> <%= r.restrictedNutrients %></p>
+      <p><strong>Recommended Foods:</strong> <%= r.recommendedFoods %></p>
+      <p><strong>Restricted Foods:</strong> <%= r.restrictedFoods %></p>
+      <% if (r.matchedMeals && r.matchedMeals.length) { %>
+        <h4>Matched Meals</h4>
+        <ul>
+          <% r.matchedMeals.forEach(m => { %>
+            <li><%= m.name %> — <%= m.calories %> kcal — <%= m.protein %>g protein</li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </article>
+  <% }) %>
+<% } else { %>
+  <p>No recommendations. Create your health profile first.</p>
+<% } %>
+</main></body></html>

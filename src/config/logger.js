@@ -1,37 +1,22 @@
-// Pino configuration
-import pino, { destination } from 'pino';
-import path from 'path';
-import APP_CONFIG from './APP_CONFIG.js';
+// src/config/logger.js
+import pino from "pino";
+import pinoRoll from "pino-roll";
+import fs from "fs";
+import path from "path";
+import { ENV } from "./config.js";
 
-const __dirname = import.meta.dirname;
-const logPath = path.join(__dirname, '../..', 'logs', 'app.log');
+const logDir = path.join(process.cwd(), "logs");
+if (!fs.existsSync(logDir)) fs.mkdirSync(logDir);
 
-const transport = pino.transport({
-    targets: [{
-        level: APP_CONFIG.PINO_LOG_LEVEL_FILE || 'trace',
-        target: 'pino-roll',
-        options: {  
-            file: logPath,
-            mkdir: true,
-            symlink: false,
-            size: '5m',
-            frequency: 'daily',
-            limit: { count: 5, removeOldFiles: true },
-            dateFormat: 'yyyy-MM-dd',
-            colorize: true,
-        },
-        
-    }, {
-        level: APP_CONFIG.PINO_LOG_LEVEL_CONSOLE || 'info',
-        target: 'pino-pretty',
-        options: { colorize: true },
-    }],
-})
+const stream = pinoRoll({
+  file: path.join(logDir, "nutrismart-%DATE%.log"),
+  frequency: "daily",
+  size: "10M",
+  retain: 7,
+  compress: true
+});
 
-
-const logger = pino(
-    {timestamp: pino.stdTimeFunctions.isoTime},
-    transport
+export const Logger = pino(
+  { level: ENV.NODE_ENV === "production" ? "info" : "debug", timestamp: pino.stdTimeFunctions.isoTime },
+  stream
 );
-
-export default logger;

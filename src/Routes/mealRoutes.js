@@ -1,21 +1,10 @@
-// import express from 'express';
-// import { mealController } from '../Controllers/mealControllers';
+// src/routes/mealRoutes.js
 
-
-// const router = express.Router();
-
-// router.get('/', mealController);
-
-// export default router;
-
-
-
-// src/routes/meal.routes.js
 import express from "express";
-import  { mealController } from "../Controllers/mealControllers.js";
+import * as ctrl from "../Controllers/mealControllers.js";
 import { authMiddleware } from "../Middleware/authMiddleware.js";
 const router = express.Router();
 
-router.get("/recommendations", mealController);
+router.get("/recommendations", authMiddleware, ctrl.getRecommendations);
 
 export default router;

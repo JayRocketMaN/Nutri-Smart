@@ -1,42 +1,19 @@
-import sequelize from "../config/db.js"; 
+// src/models/Meal.js
+
 import { DataTypes } from "sequelize";
+import { sequelize } from "../config/db.js";
 
+const Meal = sequelize.define("Meal", {
+  id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
+  name: { type: DataTypes.STRING, allowNull: false },
+  category: DataTypes.STRING,
+  calories: DataTypes.INTEGER,
+  protein: DataTypes.FLOAT,
+  carbs: DataTypes.FLOAT,
+  fat: DataTypes.FLOAT,
+  allergens: DataTypes.STRING,
+  tags: DataTypes.STRING,
+  instructions: DataTypes.TEXT
+}, { tableName: "meals", timestamps: true });
 
-const meal = sequelize.define('meal', {
-  mealId: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  mealName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  mealType: {
-    type: DataTypes.ENUM('breakfast', 'lunch', 'dinner', 'snack'),
-    allowNull: false,
-  },
-  description: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-  },
-  calories: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  nutritionalInfo: {
-    type: DataTypes.JSON,
-    allowNull: false,
-  },
-  ingredients: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  cookingInstructions: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-});
-
-export default meal;
-
+export default Meal;

@@ -1,15 +1,16 @@
-export const notFound = (req, res, next) => {
-  const error = new Error(`Not Found - ${req.originalUrl}`);
-  res.status(404);
-  next(error);
-};
+// src/middleware/errorHandler.js
+
+import AppError from "../utils/appError.js";
+import { APP_CONFIG } from "../config/config.js";
+const logger = (APP_CONFIG && APP_CONFIG.LOGGER) ? APP_CONFIG.LOGGER : console;
 
 export const errorHandler = (err, req, res, next) => {
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  if (!err.isOperational) {
+    logger.error("Unexpected Error:", err);
+    err = new AppError("Internal Server Error", 500);
+  } else {
+    logger.warn(`Handled Error: ${err.message}`);
+  }
 
-  res.status(statusCode).json({
-    success: false,
-    message: err.message,
-    stack: process.env.NODE_ENV === "production" ? null : err.stack,
-  });
+  res.status(err.statusCode || 500).json({ status: err.status || "error", message: err.message });
 };

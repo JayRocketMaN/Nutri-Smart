@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><title>Edit Meal</title><link rel="stylesheet" href="/css/style.css"></head><body>
+<header><a href="/">Nutrismart Admin</a></header>
+<main class="card"><h2>Edit Meal</h2>
+<form method="POST" action="/meals/edit/<%= meal.id %>">
+  <label>Name</label><input name="name" value="<%= meal.name %>" required />
+  <label>Calories</label><input name="calories" value="<%= meal.calories %>" type="number" />
+  <label>Protein</label><input name="protein" value="<%= meal.protein %>" type="number" step="0.1" />
+  <label>Carbs</label><input name="carbs" value="<%= meal.carbs %>" type="number" step="0.1" />
+  <label>Fat</label><input name="fat" value="<%= meal.fat %>" type="number" step="0.1" />
+  <label>Allergens</label><input name="allergens" value="<%= meal.allergens %>" />
+  <label>Tags</label><input name="tags" value="<%= meal.tags %>" />
+  <button>Save</button>
+</form></main></body></html>
