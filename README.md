@@ -14,5 +14,5 @@ Database - sequelize and mysql2
 Error handling
 RBAC
 Webhook
-TODO - Push to github
+TODO - Push to github, config redis
 CORS

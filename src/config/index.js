@@ -22,6 +22,7 @@ export default {
   REDIS_URL: process.env.REDIS_URL || "redis://localhost:6379",
   JWT_SECRET: process.env.JWT_SECRET || "your_jwt_secret_key",
   JWT_EXPIRES_IN: Number(process.env.JWT_EXPIRES_IN || 7200),
+  FRONTEND_URL: process.env.FRONTEND_URL || "http://localhost:4000"
 };
 
 // const connect_uri = mongodb://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
