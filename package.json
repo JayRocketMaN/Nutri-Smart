@@ -4,7 +4,7 @@
   "description": "Nutri_smart\r A simple mobile/web app that recommends meals and breakdown their nutritional content based on your preferences/health condition",
   "main": "mainApp.js",
   "scripts": {
-     "start": "node src/server.js",
+    "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,6 +26,8 @@
     "multer": "^2.0.2",
     "mysql2": "^3.15.3",
     "nodemailer": "^7.0.10",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
     "pino": "^10.1.0",
     "pino-roll": "^4.0.0",
     "redis": "^5.9.0",
