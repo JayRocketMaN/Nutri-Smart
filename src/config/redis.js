@@ -3,7 +3,9 @@ import { createClient } from "redis";
 import { ENV } from "./config.js";
 import { Logger } from "./logger.js";
 
-export const redisClient = createClient({ url: ENV.REDIS_URL });
+const redisUrl = ENV.REDIS_INTERNAL_URL || ENV.REDIS_URL;
+
+export const redisClient = createClient({ url: redisUrl || ENV.REDIS_URL });
 
 export async function connectRedis() {
   try {
