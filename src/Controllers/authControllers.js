@@ -1,6 +1,9 @@
 // src/controllers/authController.js
 import { authService } from "../Services/authService.js";
-import AppError from "../utils/appError.js";
+import AppError from "../utils/AppError.js";
+
+
+
 
 export const register = async (req,res,next) => {
   try {

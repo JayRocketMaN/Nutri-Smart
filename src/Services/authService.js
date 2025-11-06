@@ -2,12 +2,14 @@
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import AppError from  "../utils/appError.js";
+import AppError from  "../utils/AppError.js";
 import { User, OTP } from "../models/index.js";
 import { sendEmail } from "./emailService.js";
 import { APP_CONFIG } from "../config/config.js";
 
 const genOtp = () => Math.floor(100000 + Math.random()*900000).toString();
+//const genOtp = () => "123456"; // fixed OTP for testing
+
 
 export const authService = {
   async register({ name, email, password }) {

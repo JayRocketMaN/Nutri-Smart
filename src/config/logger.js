@@ -1,4 +1,5 @@
 // src/config/logger.js
+/*
 import pino from "pino";
 import pinoRoll from "pino-roll";
 import fs from "fs";
@@ -21,3 +22,18 @@ export const Logger = pino(
     timestamp: pino.stdTimeFunctions.isoTime },
   stream
 );
+
+*/
+
+import pino from "pino";
+
+export const Logger = pino({
+  level: "info",
+  transport: {
+    target: "pino-pretty",
+    options: {
+      colorize: true,
+      translateTime: true
+    }
+  }
+});

@@ -3,7 +3,7 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/index.js";
 import { APP_CONFIG } from "../config/config.js";
-import AppError from "../utils/appError.js";
+import AppError from "../utils/AppError.js";
 
 export const authMiddleware = async (req,res,next) => {
   try {
