@@ -11,6 +11,7 @@ export const errorHandler = (err, req, res, next) => {
     err = new AppError("Internal Server Error", 500);
   } 
   
+  
   else {
     logger.warn(`Handled Error: ${err.message}`);
   }
