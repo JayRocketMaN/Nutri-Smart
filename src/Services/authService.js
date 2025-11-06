@@ -2,7 +2,7 @@
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import AppError from  "../utils/AppError.js";
+import AppError from  "../Utils/AppError.js";
 import { User, OTP } from "../models/index.js";
 import { sendEmail } from "./emailService.js";
 import { APP_CONFIG } from "../config/config.js";

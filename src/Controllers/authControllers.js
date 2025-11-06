@@ -1,6 +1,6 @@
 // src/controllers/authController.js
 import { authService } from "../Services/authService.js";
-import AppError from "../utils/AppError.js";
+import AppError from "../Utils/AppError.js";
 
 
 
