@@ -10,7 +10,7 @@ export const cacheService = {
     if (!v) return null;
     try { return JSON.parse(v); } catch { return v; }
   },
-  async set(key, 'node redis') {
+  async set(key, node redis) {
     await client.set(key, JSON.stringify(value), { EX: ttlSec });
   },
   async delPattern(pattern) {
