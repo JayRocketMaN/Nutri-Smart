@@ -28,7 +28,12 @@ app.use((req,res,next) => { APP_CONFIG.LOGGER.info(`${req.method} ${req.original
 
 // EJS pages
 //app.get("/", (req,res) => {res.json({message: "Welcome to dashboard"}); });
-app.get("/", (req,res) => res.render("user/dashboard" ));
+//app.get("/", (req,res) => {res.render("user/dashboard" );})
+
+app.get("/", (req, res) => res.send("API is running"));
+
+
+
 app.get("/auth/login", (req,res) => res.render("user/login"));
 app.get("/auth/register", (req,res) => res.render("user/register"));
 app.get("/health/form", (req,res) => res.render("user/healthProfile"));
@@ -42,5 +47,10 @@ app.use("/meals", mealRoutes);
 
 // error handler
 app.use(errorHandler);
+
+//catch-all for undefined route
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
 export default app;
