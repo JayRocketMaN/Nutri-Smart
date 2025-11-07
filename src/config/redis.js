@@ -5,7 +5,8 @@ import { Logger } from "./logger.js";
 
 const redisUrl = ENV.REDIS_INTERNAL_URL || ENV.REDIS_URL;
 
-export const redisClient = createClient({ url: redisUrl || ENV.REDIS_URL });
+//export const redisClient = createClient({ ENV.REDIS_URL });
+export const redisClient = createClient({ url: redisUrl });
 
 export async function connectRedis() {
   try {
