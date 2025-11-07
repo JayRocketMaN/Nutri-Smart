@@ -11,6 +11,8 @@ app.use(vhost("localhost", mainApp));
 app.use(vhost("127.0.0.1", mainApp));
 app.use(vhost("admin.localhost", adminApp));
 
+app.use(mainApp);
+
 console.log("Views folder:", app.get("views"));
 
 (async () => {
