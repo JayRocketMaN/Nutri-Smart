@@ -39,7 +39,10 @@ app.get("/auth/register", (req,res) => res.render("user/register"));
 app.get("/health/form", (req,res) => res.render("user/healthProfile"));
 app.get("/auth/verify-otp", (req, res) => {
   res.render("user/verify-otp", { message: null, email: "" });
+
+  app.get("/auth/change-password", (req,res) => res.render("user/change-password"));
 });
+
 
 //app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
