@@ -52,7 +52,7 @@ export const logout = async (req,res,next) => {
   } };
 
 
-export const forgot = async (req,res,next) => { 
+export const forgotPassword = async (req,res,next) => { 
   try { await authService.forgotPassword(req.body); 
     res.json({ message: "OTP sent" }); 
   } 
@@ -62,7 +62,7 @@ export const forgot = async (req,res,next) => {
   } };
 
 
-export const reset = async (req,res,next) => { 
+export const resetPassword = async (req,res,next) => { 
   try { await authService.resetPassword(req.body); 
     res.json({ message: "Reset successful" }); 
   } 
