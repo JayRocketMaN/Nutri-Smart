@@ -8,7 +8,7 @@ import { sendEmail } from "./emailService.js";
 import { APP_CONFIG } from "../config/config.js";
 
 const genOtp = () => Math.floor(100000 + Math.random()*900000).toString();
-//const genOtp = () => "123456"; // fixed OTP for testing
+
 
 
 export const authService = {
