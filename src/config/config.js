@@ -48,18 +48,18 @@ export const APP_CONFIG = {
       // dynamic imports to avoid circular deps
       const { Logger } = await import("./logger.js");
       const { sequelize, connectDatabase } = await import("./db.js");
-      const { redisClient, connectRedis } = await import("./redis.js");
+     // const { redisClient, connectRedis } = await import("./redis.js");
       //const { transporter, verifyMailer } = await import("./mailer.js");
       const { transporter } = await import("./mailer.js");
       // set handles
       this.LOGGER = Logger;
       this.DB = sequelize;
-      this.REDIS = redisClient;
+      //this.REDIS = redisClient;
       this.MAILER = transporter;
 
       // connect (will throw on failure)
       await connectDatabase();
-      await connectRedis();
+      //await connectRedis();
       //await verifyMailer();
 
       this.LOGGER.info("APP_CONFIG.init: All systems initialized");
