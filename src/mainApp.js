@@ -44,7 +44,7 @@ app.get("/auth/verify-otp", (req, res) => {
 });
 
 
-//app.use("/auth", authRoutes);
+app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 app.use("/meals", mealRoutes);
 
