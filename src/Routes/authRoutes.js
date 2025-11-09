@@ -103,7 +103,8 @@ router.post("/reset-password",
   resetPassword);
 
 // logout
-router.get("/logout", logout);
+router.get("/logout", authMiddleware, logout);
+
 
 
 //  Change password route

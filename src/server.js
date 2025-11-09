@@ -14,9 +14,9 @@ const app = express();
     // initialize (connect DB, Redis, verify mailer, setup logger)
     await APP_CONFIG.init();
 
-    app.use(vhost("localhost", mainApp));
-    app.use(vhost("127.0.0.1", mainApp));
-    app.use(vhost("admin.localhost", adminApp));
+    // app.use(vhost("localhost", mainApp));
+    // app.use(vhost("127.0.0.1", mainApp));
+    // app.use(vhost("admin.localhost", adminApp));
 
     app.use(mainApp);
 
