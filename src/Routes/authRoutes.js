@@ -25,7 +25,7 @@ const router = express.Router();
 
 
 // Actual post routes
-router.post("/auth/register",
+router.post("/register",
   [
     body("name")
     .notEmpty().withMessage("Name is required")
@@ -40,7 +40,7 @@ router.post("/auth/register",
   register
 );
 
-router.post("/auth/verify-otp",
+router.post("/verify-otp",
   [
     body("email")
     .notEmpty().withMessage("Email is required")
@@ -52,7 +52,7 @@ router.post("/auth/verify-otp",
    verifyOtp
   );
 
-router.post("/auth/login",
+router.post("/login",
    [
     body("email")
     .notEmpty().withMessage("Email is required")
@@ -63,7 +63,7 @@ router.post("/auth/login",
   ], 
   login);
 
-router.get("/auth/send-otp", verifyAccountMiddleware, resendOtp);  
+router.get("/send-otp", verifyAccountMiddleware, resendOtp);  
   
 router.post("auth/forgot-password", 
   [
@@ -74,7 +74,7 @@ router.post("auth/forgot-password",
   forgotPassword
 );
 
-router.post("/auth/reset-password", 
+router.post("/reset-password", 
   [
     body("email")
     .notEmpty().withMessage("Email is required")
@@ -89,11 +89,11 @@ router.post("/auth/reset-password",
   resetPassword);
 
 // logout
-router.get("/auth/logout", logout);
+router.get("/logout", logout);
 
 
 //  Change password route
-router.post("/auth/change-password", 
+router.post("/change-password", 
   authMiddleware, 
   [
     body("oldPassword")
