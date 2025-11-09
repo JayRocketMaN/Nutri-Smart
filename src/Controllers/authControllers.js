@@ -25,6 +25,7 @@ export const verifyOtp = async (req,res,next) => {
   { next(err); }
 
 };
+res.redirect("/auth/login");
 
 // Resend otp
 export const resendOtp = async (req, res) => {
@@ -46,6 +47,7 @@ export const resendOtp = async (req, res) => {
 
    res.status(201).json({ message: "OTP sent to your email" });
 };
+  
 
 
 // export const login = async (req,res,next) => {
