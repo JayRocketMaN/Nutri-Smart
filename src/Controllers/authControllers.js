@@ -19,13 +19,15 @@ export const register = async (req,res,next) => {
 export const verifyOtp = async (req,res,next) => {
   try { 
     await authService.verifyOtp(req.body); 
-    res.json({ message: "Verified" }); 
+    res.json({ message: "Verified" });
   } 
   catch (err) 
   { next(err); }
 
 };
 res.redirect("/auth/login");
+
+
 
 // Resend otp
 export const resendOtp = async (req, res) => {
