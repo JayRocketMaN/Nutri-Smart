@@ -20,7 +20,7 @@ export const verifyOtp = async (req,res,next) => {
   try { 
     await authService.verifyOtp(req.body); 
     res.json({ message: "Verified" });
-    return res.redirect("/login");
+    return res.redirect("/auth/login");
   } 
   catch (err) 
   { next(err); }
