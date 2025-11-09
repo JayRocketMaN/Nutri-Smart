@@ -16,15 +16,40 @@ export const register = async (req,res,next) => {
 };
 
 
-export const verifyOtp = async (req,res,next) => {
-  try { 
-    await authService.verifyOtp(req.body); 
-    res.json({ message: "Verified" });
-    return res.redirect("auth/login");
-  } 
-  catch (err) 
-  { next(err); }
+// export const verifyOtp = async (req,res,next) => {
+//   try { 
+//     await authService.verifyOtp(req.body); 
+//     res.json({ message: "Verified" });
+//   } 
+//   catch (err) 
+//   { next(err); }
 
+// };
+
+export const verifyOtp = async (req, res, next) => {
+  try {
+    const { email, otp } = req.body;
+
+    const userOtp = await OTP.findOne({ where: { email, code: otp } });
+
+    if (!userOtp) {
+      return res.render("verify-otp", { error: "Invalid or expired OTP" });
+    }
+
+    // Mark user as verified
+    const user = await User.findOne({ where: { email } });
+    user.isVerified = true;
+    await user.save();
+
+    // Delete OTP after verification
+    await OTP.destroy({ where: { email } });
+
+    // Redirect to login page
+    return res.redirect("/login");
+  } catch (error) {
+    console.error("Error verifying OTP:", error);
+    next(error);
+  }
 };
 
 // Resend otp
