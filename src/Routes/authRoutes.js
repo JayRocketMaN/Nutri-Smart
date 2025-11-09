@@ -5,8 +5,8 @@ import {
   verify,
   login,
   logout,
-  forgot,
-  reset,
+  forgotPassword,
+  resetPassword,
   changePassword,
   resendOtp
 } from "../Controllers/authControllers.js";
@@ -25,7 +25,7 @@ const router = express.Router();
 
 
 // Actual post routes
-router.post("/register",
+router.post("auth/register",
   [
     body("name")
     .notEmpty().withMessage("Name is required")
@@ -40,7 +40,7 @@ router.post("/register",
   register
 );
 
-router.post("/verify-otp",
+router.post("auth/verify-otp",
   [
     body("email")
     .notEmpty().withMessage("Email is required")
@@ -52,7 +52,7 @@ router.post("/verify-otp",
    verify
   );
 
-router.post("/login",
+router.post("auth/login",
    [
     body("email")
     .notEmpty().withMessage("Email is required")
@@ -63,18 +63,18 @@ router.post("/login",
   ], 
   login);
 
-router.get("/send-otp", verifyAccountMiddleware, resendOtp);  
+router.get("auth/send-otp", verifyAccountMiddleware, resendOtp);  
   
-router.post("/forgot", 
+router.post("auth/forgot-password", 
   [
     body("email")
     .notEmpty().withMessage("Email is required")
     .isEmail().withMessage("Invalid email"),
   ],
-  forgot
+  forgotPassword
 );
 
-router.post("/reset", 
+router.post("auth/reset-password", 
   [
     body("email")
     .notEmpty().withMessage("Email is required")
@@ -86,7 +86,7 @@ router.post("/reset",
     .notEmpty().withMessage("New password is required")
     .isLength({ min: 6 }).withMessage("New password must be at least 6 characters"),
   ],
-  reset);
+  resetPassword);
 
 // logout
 router.get("/logout", logout);
