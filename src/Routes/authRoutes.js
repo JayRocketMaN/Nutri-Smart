@@ -78,7 +78,7 @@ router.post("/login",
 
 router.get("/send-otp", verifyAccountMiddleware, resendOtp);  
   
-router.post("auth/forgot-password", 
+router.post("/forgot-password", 
   [
     body("email")
     .notEmpty().withMessage("Email is required")
@@ -103,7 +103,7 @@ router.post("/reset-password",
   resetPassword);
 
 // logout
-router.get("/logout", authMiddleware, logout);
+router.get("/logout", logout);
 
 
 
