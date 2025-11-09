@@ -2,7 +2,7 @@ import express from "express";
 import { body } from "express-validator";
 import {
   register,
-  verify,
+  verifyOtp,
   login,
   logout,
   forgotPassword,
@@ -49,7 +49,7 @@ router.post("auth/verify-otp",
     .notEmpty().withMessage("OTP is required")
     .isLength({ min: 6, max: 6 }).withMessage("OTP must be 6 characters"),
   ],
-   verify
+   verifyOtp
   );
 
 router.post("auth/login",
