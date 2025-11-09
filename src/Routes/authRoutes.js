@@ -76,7 +76,7 @@ router.post("/login",
   validate,
   login);
 
-router.get("/send-otp", verifyAccountMiddleware, resendOtp);  
+router.get("/send-otp",  resendOtp);  
   
 router.post("/forgot-password", 
   [
