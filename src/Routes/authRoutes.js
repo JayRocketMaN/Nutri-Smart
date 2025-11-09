@@ -1,5 +1,5 @@
 import express from "express";
-import { body } from "express-validator";
+import { body, validationResult } from "express-validator";
 import {
   register,
   verifyOtp,
@@ -23,6 +23,16 @@ const router = express.Router();
 // router.get("/reset", (req, res) => res.render("auth/reset"));
 // router.get("/change-password", authMiddleware ,(req, res) => res.render("auth/changePassword"));
 
+// Middleware to check validation results
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ status: "fail", errors: errors.array() });
+  }
+  next();
+};
+
+
 
 // Actual post routes
 router.post("/register",
@@ -37,6 +47,7 @@ router.post("/register",
     .notEmpty().withMessage("Password is required")
     .isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
 ],
+validate,
   register
 );
 
@@ -49,6 +60,7 @@ router.post("/verify-otp",
     .notEmpty().withMessage("OTP is required")
     .isLength({ min: 6, max: 6 }).withMessage("OTP must be 6 characters"),
   ],
+  validate,
    verifyOtp
   );
 
@@ -61,6 +73,7 @@ router.post("/login",
     .notEmpty().withMessage("Password is required")
     .isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
   ], 
+  validate,
   login);
 
 router.get("/send-otp", verifyAccountMiddleware, resendOtp);  
@@ -86,6 +99,7 @@ router.post("/reset-password",
     .notEmpty().withMessage("New password is required")
     .isLength({ min: 6 }).withMessage("New password must be at least 6 characters"),
   ],
+  validate,
   resetPassword);
 
 // logout
@@ -98,11 +112,12 @@ router.post("/change-password",
   [
     body("oldPassword")
     .notEmpty().withMessage("Password is required")
-    .isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
+    .isLength({ min: 4 }).withMessage("Password must be at least 6 characters"),
     body("newPassword")
     .notEmpty().withMessage("New password is required")
     .isLength({ min: 6 }).withMessage("New password must be at least 6 characters"),
   ],
+  validate,
   changePassword);
 
 export default router;
