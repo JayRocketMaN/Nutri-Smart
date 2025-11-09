@@ -41,9 +41,6 @@ export const verifyOtp = async (req, res, next) => {
     user.isVerified = true;
     await user.save();
 
-    // Delete OTP after verification
-    await OTP.destroy({ where: { email } });
-
     // Redirect to login page
     return res.redirect("/login");
   } catch (error) {
