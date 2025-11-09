@@ -94,6 +94,9 @@ export const login = async (req, res, next) => {
   try {
     const out = await authService.login(req.body);
 
+    // Redirect to dashboard or send JSON
+    res.redirect("/");  
+    
     // Set token in HTTP-only cookie
     res.cookie("token", out.token, {
       httpOnly: true,
@@ -102,8 +105,7 @@ export const login = async (req, res, next) => {
       sameSite: "lax",
     });
 
-    // Redirect to dashboard or send JSON
-    res.redirect("/"); 
+   
     // res.redirect("/health/form"); // for EJS frontend
     //res.json({ user: out.user }); // for API only
   } catch (err) {
