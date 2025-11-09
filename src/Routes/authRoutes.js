@@ -113,7 +113,7 @@ router.post("/change-password",
   [
     body("oldPassword")
     .notEmpty().withMessage("Password is required")
-    .isLength({ min: 4 }).withMessage("Password must be at least 6 characters"),
+    .isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
     body("newPassword")
     .notEmpty().withMessage("New password is required")
     .isLength({ min: 6 }).withMessage("New password must be at least 6 characters"),
