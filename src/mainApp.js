@@ -30,7 +30,7 @@ app.use((req,res,next) => { APP_CONFIG.LOGGER.info(`${req.method} ${req.original
 //app.get("/", (req,res) => {res.json({message: "Welcome to dashboard"}); });
 //app.get("/", (req,res) => {res.render("user/dashboard" );})
 
-app.get("/", (req, res) => res.send("API is running"));
+app.get("/", (req, res) => res.render("/"));
 
 
 
