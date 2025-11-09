@@ -2,6 +2,7 @@
 
 import express from "express";
 import * as ctrl from "../Controllers/authControllers.js";
+import {authMiddleware } from "../Middleware/authMiddleware.js"
 const router = express.Router();
 
 router.post("/register", ctrl.register);
@@ -10,6 +11,6 @@ router.post("/login", ctrl.login);
 router.post("/logout", ctrl.logout);
 router.post("/forgot-password", ctrl.forgotPassword);
 router.post("/reset-password", ctrl.resetPassword);
-router.patch("/change-password", ctrl.changePassword);
+router.patch("/change-password", authMiddleware, ctrl.changePassword);
 
 export default router;
