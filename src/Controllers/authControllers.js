@@ -24,9 +24,8 @@ export const verifyOtp = async (req,res,next) => {
   catch (err) 
   { next(err); }
 
-  return res.redirect("/login");
-
 };
+
 
 
 // Resend otp
