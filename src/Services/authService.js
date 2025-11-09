@@ -34,6 +34,23 @@ export const authService = {
     return true;
   },
 
+  
+  // Resend otp - for resend cases
+  async resendOtp(userId) {
+    const user = await User.findByPk(userId);
+    if (!user) throw new AppError("User not found", 404);
+
+    const code = genOtp();
+    const expiresAt = new Date(Date.now() + 15*60*1000);
+
+    await OTP.create({ userId: user.id, email: user.email, code, purpose: "verify", expiresAt });
+
+    await sendEmail({ to: user.email, subject: "Nutrismart OTP", text: `Your verification code: ${code}` });
+
+    return { message: "OTP resent successfully" };
+  },
+  
+
   async login({ email, password }) {
     const user = await User.findOne({ where: { email }});
     if (!user) throw new AppError("Invalid credentials", 400);

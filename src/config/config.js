@@ -22,7 +22,7 @@ export const ENV = {
   SMTP_PASS: process.env.SMTP_PASS || "",
   JWT_SECRET: process.env.JWT_SECRET || "supersecretjwt",
   FRONTEND_URL: process.env.FRONTEND_URL || "http://localhost:4000",
-
+  JWT_OTP_SECRET: process.env.JWT_OTP_SECRET,
   
   // SMTP / SendGrid
   SMTP_USER: process.env.SMTP_USER, 
