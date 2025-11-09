@@ -71,6 +71,7 @@ export const resendOtp = async (req, res, next) => {
     if (!email) return next(new AppError("Email is required", 400));
 
     const out = await authService.resendOtp(email);  // ✅ call with email
+    return res.redirect("/auth/login");
     return res.status(200).json(out);
   } catch (error) {
     next(error);
