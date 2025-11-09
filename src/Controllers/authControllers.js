@@ -48,16 +48,38 @@ export const resendOtp = async (req, res) => {
 };
 
 
-export const login = async (req,res,next) => {
-  try { 
-    const out = await authService.login(req.body); 
-    res.json(out); 
-  } catch (err) 
-  { next(err); 
+// export const login = async (req,res,next) => {
+//   try { 
+//     const out = await authService.login(req.body); 
+//     res.json(out); 
+//   } catch (err) 
+//   { next(err); 
 
+//   }
+
+// };
+
+
+export const login = async (req, res, next) => {
+  try {
+    const out = await authService.login(req.body);
+
+    // Set token in HTTP-only cookie
+    res.cookie("token", out.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      sameSite: "lax",
+    });
+
+    // Redirect to dashboard or send JSON
+    res.redirect("/dashboard"); // for EJS frontend
+    // OR res.json({ user: out.user }); // for API only
+  } catch (err) {
+    next(err);
   }
-
 };
+
 
 
 export const logout = async (req,res,next) => {
