@@ -7,10 +7,10 @@ import {
   logout,
   forgot,
   reset,
-  changePasswordController,
+  changePassword,
   resendOtp
-} from "../controllers/authControllers.js";
-import { authMiddleware, verifyAccountMiddleware } from "../middleware/authMiddleware.js";
+} from "../Controllers/authControllers.js";
+import { authMiddleware, verifyAccountMiddleware } from "../Middleware/authMiddleware.js";
 
 
 const router = express.Router();
@@ -103,6 +103,6 @@ router.post("/change-password",
     .notEmpty().withMessage("New password is required")
     .isLength({ min: 6 }).withMessage("New password must be at least 6 characters"),
   ],
-  changePasswordController);
+  changePassword);
 
 export default router;
