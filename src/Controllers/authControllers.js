@@ -19,8 +19,8 @@ export const register = async (req,res,next) => {
 export const verifyOtp = async (req,res,next) => {
   try { 
     await authService.verifyOtp(req.body); 
-    //res.json({ message: "Verified" });
-    return res.redirect("/auth/login");
+    res.json({ message: "Verified" });
+    //return res.redirect("/auth/login");
   } catch (err) 
   { next(err); 
 
@@ -81,23 +81,10 @@ export const resendOtp = async (req, res) => {
 //   }
 // };
 
-// export const login = async (req,res,next) => {
-//   try { 
-//     const out = await authService.login(req.body); 
-//     res.json(out); 
-//   } catch (err) 
-//   { next(err); 
+export const login = async (req,res,next) => {
+  try { 
+    const out = await authService.login(req.body); 
 
-//   }
-
-// };
-
-
-export const login = async (req, res, next) => {
-  try {
-    const out = await authService.login(req.body);
-    
-    // Set token in HTTP-only cookie
     res.cookie("token", out.token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -105,14 +92,35 @@ export const login = async (req, res, next) => {
       sameSite: "lax",
     });
 
-     // Redirect to dashboard or send JSON
-    //res.redirect("/health/form");  
-    // res.redirect("/health/form"); // for EJS frontend
-    res.json({ user: out.user }); // for API only
-  } catch (err) {
-    next(err);
+    res.json(out); 
+  } catch (err) 
+  { next(err); 
+
   }
+
 };
+
+
+// export const login = async (req, res, next) => {
+//   try {
+//     const out = await authService.login(req.body);
+    
+//     // Set token in HTTP-only cookie
+//     res.cookie("token", out.token, {
+//       httpOnly: true,
+//       secure: process.env.NODE_ENV === "production",
+//       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+//       sameSite: "lax",
+//     });
+
+//      // Redirect to dashboard or send JSON
+//     //res.redirect("/health/form");  
+//     // res.redirect("/health/form"); // for EJS frontend
+//     res.json({ user: out.user }); // for API only
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 
 
 

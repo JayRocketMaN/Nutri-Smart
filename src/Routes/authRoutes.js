@@ -76,7 +76,15 @@ router.post("/login",
   validate,
   login);
 
-router.get("/send-otp",  resendOtp);  
+router.post("/send-otp", 
+    [
+    body("email")
+      .notEmpty().withMessage("Email is required")
+      .isEmail().withMessage("Invalid email"),
+  ],
+  validate,
+  resendOtp
+); 
   
 router.post("/forgot-password", 
   [
@@ -84,6 +92,7 @@ router.post("/forgot-password",
     .notEmpty().withMessage("Email is required")
     .isEmail().withMessage("Invalid email"),
   ],
+  validate,
   forgotPassword
 );
 
@@ -103,7 +112,7 @@ router.post("/reset-password",
   resetPassword);
 
 // logout
-router.get("/logout", logout);
+router.get("/logout",authMiddleware, logout);
 
 
 

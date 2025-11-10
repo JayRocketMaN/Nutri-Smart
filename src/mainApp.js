@@ -37,8 +37,8 @@ app.use(express.static(path.join(process.cwd(), "public")));
 app.use((req,res,next) => { APP_CONFIG.LOGGER.info(`${req.method} ${req.originalUrl}`); next(); });
 
 // EJS pages
-//app.get("/", (req,res) => {res.json({message: "Welcome to dashboard"}); });
-app.get("/", (req,res) => {res.render("user/dashboard" );})
+app.get("/", (req,res) => {res.json({message: "Welcome to dashboard"}); });
+//app.get("/", (req,res) => {res.render("user/dashboard" );})
 
 //app.get("/", (req, res) => res.render("/"));
 
@@ -49,9 +49,9 @@ app.get("/auth/register", (req,res) => res.render("user/register"));
 app.get("/health/form", (req,res) => res.render("user/healthProfile"));
 app.get("/auth/verify-otp", (req, res) => {
   res.render("user/verify-otp", { message: null, email: "" });
-
-  app.get("/auth/change-password", (req,res) => res.render("user/change-password"));
 });
+app.get("/auth/change-password", (req,res) => res.render("user/change-password"));
+
 
 
 app.use("/auth", authRoutes);
