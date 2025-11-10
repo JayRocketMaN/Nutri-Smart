@@ -7,8 +7,8 @@ import { User, OTP } from "../models/index.js";
 import { sendEmail } from "./emailService.js";
 import { APP_CONFIG } from "../config/config.js";
 
-const genOtp = () => Math.floor(100000 + Math.random()*900000).toString();
-
+//const genOtp = () => Math.floor(100000 + Math.random()*900000).toString();
+const genOtp = () => Math.floor(100000 + Math.random()*900000);
 
 
 export const authService = {
@@ -27,7 +27,7 @@ export const authService = {
   },
 
   async verifyOtp({ email, code }) {
-    const otp = await OTP.findOne({ where: { email, code, consumed: false }});
+    const otp = await OTP.findOne({ where: { email, code: Number(code), consumed: false }});
     if (!otp || new Date() > otp.expiresAt) throw new AppError("Invalid or expired OTP", 400);
     otp.consumed = true; await otp.save();
     await User.update({ verified: true }, { where: { email }});
