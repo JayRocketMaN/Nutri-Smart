@@ -15,9 +15,19 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(process.cwd(), "views"));
 
+//handle cookie being sent to body of website
+const allowedOrigins = [
+  "http://localhost:4000",
+  
+  "https://chinaemerem703.github.io/Nutrismart/"
+];
 
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
-app.use(cors({ origin: true, credentials: true }));
+//app.use(cors({ origin: true, credentials: true }));
 app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
