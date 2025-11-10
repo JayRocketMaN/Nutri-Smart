@@ -103,7 +103,7 @@ export const login = async (req, res, next) => {
     });
 
      // Redirect to dashboard or send JSON
-    res.redirect("/");  
+    res.redirect("/health/form");  
     // res.redirect("/health/form"); // for EJS frontend
     //res.json({ user: out.user }); // for API only
   } catch (err) {
