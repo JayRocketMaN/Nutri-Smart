@@ -76,7 +76,7 @@ router.post("/login",
   validate,
   login);
 
-router.post("/send-otp", 
+router.post("/resend-otp", 
     [
     body("email")
       .notEmpty().withMessage("Email is required")
