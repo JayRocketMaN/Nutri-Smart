@@ -15,12 +15,14 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(process.cwd(), "views"));
 
-//handle cookie being sent to body of website
+
+// Allowed origins for CORS
 const allowedOrigins = [
   "http://localhost:4000",
   "https://chinaemerem703.github.io"
 ];
 
+// CORS setup
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true); // allow server-to-server or Postman
@@ -32,8 +34,9 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-// Handle preflight
+// Handle OPTIONS preflight for all routes
 app.options("*", cors());
+
 
 //app.use(cors({ origin: true, credentials: true }));
 app.use(helmet());
