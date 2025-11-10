@@ -26,16 +26,8 @@ export const authService = {
     return { id: user.id, email: user.email };
   },
 
-  async verifyOtp({ email, code }) {
-    const otp = await OTP.findOne({ where: { email, code: Number(code), consumed: false }});
-    if (!otp || new Date() > otp.expiresAt) throw new AppError("Invalid or expired OTP", 400);
-    otp.consumed = true; await otp.save();
-    await User.update({ verified: true }, { where: { email }});
-    return true;
-  },
 
-  
-  // // Resend otp - for resend cases
+   // // Resend otp - for resend cases
   // async resendOtp(userId) {
   //   const user = await User.findByPk(userId);
   //   if (!user) throw new AppError("User not found", 404);
@@ -74,6 +66,19 @@ export const authService = {
   return { message: "OTP resent successfully" };
 },
 
+
+  async verifyOtp({ email, code }) {
+    const otp = await OTP.findOne({ where: { email, code: Number(code), consumed: false }});
+    console.log("Received OTP:", code);
+    console.log("OTP in DB:", otp);
+    if (!otp || new Date() > otp.expiresAt) throw new AppError("Invalid or expired OTP", 400);
+    otp.consumed = true; await otp.save();
+    await User.update({ verified: true }, { where: { email }});
+    return true;
+  },
+
+  
+ 
   async login({ email, password }) {
     const user = await User.findOne({ where: { email }});
     if (!user) throw new AppError("Invalid credentials", 400);
