@@ -16,29 +16,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(process.cwd(), "views"));
 
 
-// Allowed origins for CORS
-const allowedOrigins = [
-  "http://localhost:4000",
-  "https://chinaemerem703.github.io"
-];
 
-// CORS setup
-app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // allow server-to-server or Postman
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    callback(new Error("Not allowed by CORS"));
-  },
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
-// Handle OPTIONS preflight for all routes
-app.options("*", cors());
-
-
-//app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: true, credentials: true }));
 app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
