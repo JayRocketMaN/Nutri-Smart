@@ -28,9 +28,9 @@ app.use((req,res,next) => { APP_CONFIG.LOGGER.info(`${req.method} ${req.original
 
 // EJS pages
 //app.get("/", (req,res) => {res.json({message: "Welcome to dashboard"}); });
-//app.get("/", (req,res) => {res.render("user/dashboard" );})
+app.get("/", (req,res) => {res.render("user/dashboard" );})
 
-app.get("/", (req, res) => res.render("/"));
+//app.get("/", (req, res) => res.render("/"));
 
 
 
