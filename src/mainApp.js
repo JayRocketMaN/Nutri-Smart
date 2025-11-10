@@ -18,15 +18,20 @@ app.set("views", path.join(process.cwd(), "views"));
 //handle cookie being sent to body of website
 const allowedOrigins = [
   "http://localhost:4000",
-  
-  "https://chinaemerem703.github.io/Nutrismart/"
+  "https://chinaemerem703.github.io/Nutrismart"
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // allow non-browser requests like Postman
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
-
 //app.use(cors({ origin: true, credentials: true }));
 app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
